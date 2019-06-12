@@ -1,0 +1,23 @@
+<div class="example-container">
+  <form (ngSubmit)="f.form.valid && OnSave(f)" #f="ngForm" novalidate>
+    <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="task.name" name="name" required #titleref="ngModel">
+    </mat-form-field>
+    <span class="help-block" *ngIf="!titleref.valid && titleref.touched"> Please input the Task Title</span>
+
+    <mat-form-field>
+        <mat-label>Task Description</mat-label>
+        <textarea matInput [(ngModel)]="task.description" name="description" required #descriptionref = "ngModel"></textarea>
+    </mat-form-field>
+    <span class="help-block" *ngIf="!descriptionref.valid && descriptionref.touched"> Please input the Task Description</span>
+    <mat-form-field>
+        <mat-label>AssignTo</mat-label>
+        <mat-select name="assign" [(ngModel)]="task.userid" #assignref="ngModel" required>
+          <mat-option *ngFor="let user of Users; let i = index" value="{{user[0]}}">{{user[1].firstName}} {{user[1].lastName}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-raised-button class="submit-btn" type="submit" [disabled]="f.invalid" color="primary">Save Task</button>
+<!--  <span class="help-block" *ngIf="!assignref. && assignref.touched"> Please Select The User</span>-->
+  </form>
+</div>

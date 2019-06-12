@@ -1,0 +1,25 @@
+<mat-toolbar>
+  <span>LOGIN</span>
+</mat-toolbar>
+<mat-card class="my-card">
+  <mat-card-content>
+    <form class="my-form" (ngSubmit)="f.form.valid && login(f)" #f="ngForm" novalidate>
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input  matInput type="email" placeholder="Email" [(ngModel)]="email" name="email" required email #emailref="ngModel">
+      </mat-form-field>
+      <span class="help-block" *ngIf="!emailref.valid && emailref.touched"> Please input the valid email address</span>
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input  matInput  type="password" placeholder="Password" [(ngModel)]="password" name="password" required #passwordref="ngModel">
+      </mat-form-field>
+      <span class="help-block" *ngIf="!passwordref.valid && passwordref.touched"> Password is Required</span>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit" [disabled]="f.invalid">LOGIN</button>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+
+
+
+</mat-card>

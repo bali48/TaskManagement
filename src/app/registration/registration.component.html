@@ -1,0 +1,55 @@
+<mat-toolbar>
+  <span>Registration</span>
+</mat-toolbar>
+<mat-card class="my-card">
+  <mat-card-content>
+    <form class="RegistrationForm" (ngSubmit)="register(reg)" #reg="ngForm" novalidate>
+      <mat-form-field class="full-width">
+        <mat-label>First Name</mat-label>
+        <input  matInput  placeholder="First name" [(ngModel)]="user.firstName" name="firstname" #firstnameref="ngModel" required>
+      </mat-form-field>
+      <span class="help-block" *ngIf="!firstnameref.valid && firstnameref.touched">First Name is Required</span>
+      <mat-form-field class="full-width">
+        <mat-label>Last Name</mat-label>
+        <input  matInput  placeholder="Last Name" [(ngModel)]="user.lastName" name="lastname" required #lastnameref="ngModel">
+      </mat-form-field>
+      <span class="help-block" *ngIf="!lastnameref.valid && lastnameref.touched">Last Name is Required</span>
+      <mat-form-field class="full-width">
+        <mat-label>Address</mat-label>
+        <input  matInput  placeholder="Address" name="address" [(ngModel)]="user.address" required #addressref="ngModel">
+      </mat-form-field>
+      <span class="help-block" *ngIf="!addressref.valid && addressref.touched">Address is Required</span>
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input  matInput  placeholder="Email" type="email" [(ngModel)]="user.email" name="email" required email #emailref="ngModel">
+      </mat-form-field>
+      <span class="help-block" *ngIf="!emailref.valid && emailref.touched">Email is Required</span>
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input  matInput  placeholder="Password" [(ngModel)]="user.password" type="password" name="password" required #passwordref="ngModel">
+      </mat-form-field>
+      <span class="help-block" *ngIf="!passwordref.valid && passwordref.touched">Password is Required</span>
+      <section class="example-section">
+        <label class="example-margin">Gender:</label>
+        <mat-radio-group [(ngModel)]="user.gender" [ngModelOptions]="{standalone:
+   true}" required #genderref="ngModel">
+          <mat-radio-button class="example-margin" value="1">Male</mat-radio-button>
+          <mat-radio-button class="example-margin" value="2">Female</mat-radio-button>
+        </mat-radio-group>
+        <span class="help-block" *ngIf="!genderref.valid && genderref.touched">Choose your Gender</span>
+      </section>
+
+<!--      <mat-form-field>-->
+<!--        <mat-label>Date of Birth</mat-label>-->
+<!--        <input matInput [matDatepicker]="picker" [(ngModel)]="user.dob" placeholder="Choose a date" #dobref="ngModel">-->
+<!--        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--        <mat-datepicker #picker></mat-datepicker>-->
+<!--      </mat-form-field>-->
+<!--      <span class="help-block" *ngIf="!dobref.valid && dobref.touched">Please pick your date of birth</span>-->
+      <mat-card-actions>
+        <button mat-raised-button type="submit" [disabled]="reg.invalid" color="primary">REGISTER</button>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+
+</mat-card>
