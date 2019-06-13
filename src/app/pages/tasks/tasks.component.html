@@ -14,7 +14,7 @@
     <mat-form-field>
         <mat-label>AssignTo</mat-label>
         <mat-select name="assign" [(ngModel)]="task.userid" #assignref="ngModel" required>
-          <mat-option *ngFor="let user of Users; let i = index" value="{{user[0]}}">{{user[1].firstName}} {{user[1].lastName}}</mat-option>
+          <mat-option *ngFor="let user of Users; let i = index" value="{{user.payload.doc.id}}">{{user.payload.doc.data().firstName}} {{user.payload.doc.data().lastName}}</mat-option>
         </mat-select>
     </mat-form-field>
     <button mat-raised-button class="submit-btn" type="submit" [disabled]="f.invalid" color="primary">Save Task</button>

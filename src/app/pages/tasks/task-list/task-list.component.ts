@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {TaskService} from '../../../services/task.service';
 import {TasksModel} from '../tasks-model';
 import {UserService} from '../../../services/user.service';
+import {MatSort, MatTableDataSource} from '@angular/material';
+import {timeout} from 'q';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-task-list',
@@ -10,23 +13,19 @@ import {UserService} from '../../../services/user.service';
 })
 export class TaskListComponent implements OnInit {
   displayedColumns = ['Title', 'Description', 'AssignTo'];
-  tasks: TasksModel[];
-  dataSource = null;
+  tasks;
+    dataSource: MatTableDataSource<any>;
 
-  constructor(private taskService: TaskService, private userService: UserService) {
+    @ViewChild(MatSort) sort: MatSort;
+
+  constructor(private taskService: TaskService, private userService: UserService, private firestore: AngularFirestore) {
   }
 
   ngOnInit() {
-    this.taskService.ListTasks().subscribe(
-        (tasklist: TasksModel[]) => {
-          this.tasks = tasklist;
-          console.log('rtas', this.tasks);
-          // this.tasks.forEach(obj => {
-          //  // const name = this.userService.SingleUser(obj.userid);
-          //   console.log('name of assigne', name);
-          // });
-        }
-    );
+      this.tasks = this.taskService.ListTasks();
+      console.log(this.tasks);
+      this.dataSource = new MatTableDataSource(this.tasks);
+      this.dataSource.sort = this.sort;
   }
 
 }

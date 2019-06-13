@@ -10,7 +10,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
   providedIn: 'root'
 })
 export class UserService {
-  user: UserModel[] = [];
+  user: UserModel;
   userServiceIndicator = new  Subject<UserModel[]>();
     constructor(private http: HttpClient, private firestore: AngularFirestore) { }
 
@@ -39,7 +39,10 @@ export class UserService {
       return this.firestore.collection('users').snapshotChanges();
     }
 
-  SingleUser(userID: number) {
-     return this.http.get('https://taskmanagement-987c0.firebaseio.com/users.json/' + userID);
+  SingleUser(userID: string) {
+      return this.firestore.collection('users').ref.where('key', '==', userID)
+          .limit(1)
+          .get();
+
   }
 }

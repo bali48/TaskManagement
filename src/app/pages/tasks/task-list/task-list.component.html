@@ -1,1 +1,33 @@
-hahaha
+<div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource" matSort class="animate">
+
+        <ng-container matColumnDef="Title">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+            <mat-cell *matCellDef="let task"> {{ task.payload.doc.data().name }} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="Description">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+            <mat-cell *matCellDef="let task"> {{ task.payload.doc.data().description }} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="AssignTo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> AssignTo </mat-header-cell>
+            <mat-cell *matCellDef="let task"> {{task.payload.doc.data().userid}} </mat-cell>
+        </ng-container>
+
+
+        <!--  <ng-container matColumnDef="edit">-->
+        <!--    <mat-header-cell *matHeaderCellDef mat-sort-header> Edit </mat-header-cell>-->
+        <!--    <mat-cell *matCellDef="let task">-->
+        <!--      <button mat-raised-button  color="primary" (click)="openDialog(task)">Edit</button>-->
+        <!--    </mat-cell>-->
+        <!--  </ng-container>-->
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="animate"></mat-row>
+    </mat-table>
+
+</div>

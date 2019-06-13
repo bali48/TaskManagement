@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {UserModel} from '../pages/user/user-model';
 import {UserService} from '../services/user.service';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -11,7 +12,7 @@ import {UserService} from '../services/user.service';
 export class RegistrationComponent implements OnInit {
   // gender = '1';
   user = new UserModel();
-  constructor(private userHandler: UserService) { }
+  constructor(private userHandler: UserService, private authenticate: AuthService) { }
 
   ngOnInit() {
   }
@@ -26,10 +27,11 @@ export class RegistrationComponent implements OnInit {
         //     }
         // );
         const param = JSON.parse(JSON.stringify(this.user));
-        this.userHandler.SaveUser(param)
-            .then(res => {
-                regForm.resetForm();
-            });
+        this.authenticate.RegisterUser(param);
+        // this.userHandler.SaveUser(param)
+        //     .then(res => {
+        //         regForm.resetForm();
+        //     });
 
     }
   }
